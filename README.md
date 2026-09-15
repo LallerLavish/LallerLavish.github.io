@@ -1,78 +1,75 @@
-# Portfolio — Lavish Laller
+# lallerlavish.github.io
 
-Single-file static site. No build step, no dependencies. Open `index.html` in a browser to preview.
+Personal portfolio — **[lallerlavish.github.io](https://lallerlavish.github.io)**
 
-```
-Portfolio/
-├── index.html          ← everything (HTML + CSS + JS + cover art)
-├── README.md
-└── assets/
-    └── Lavish_Laller_Resume.pdf   ✓ already in place
-```
+Backend & Systems Engineer. Rust, Java, Spring Boot. Previously Samsung R&D Institute (SRI-D),
+where I built an on-device AI daemon for edge system recovery.
 
-Project covers are generated in the page as SVG — there are no image files to manage.
+## Built with
 
-## 1. Media — nothing required
+Plain HTML, CSS and JavaScript in a single file — no framework, no build step, no dependencies.
+Project cover art is generated in-page as SVG, so the site ships with one photo and a PDF and
+nothing else. Deployed on GitHub Pages.
 
-Project covers are **drawn by the page itself** — a designed cover per project carrying its
-name, category and a motif (a breached wall for mcp-wall, cited pages for PaperMind, an agent
-graph for AlgoForge). No screenshots to take, nothing to export, and they stay crisp at any size.
-Demo videos live on GitHub, which the **View Source** button links to.
+Dark theme — black through deep indigo, purple into blue. The hero runs a canvas code
+animation behind the whole section; it pauses when off-screen or when the tab is hidden, and
+falls back to a single static frame under `prefers-reduced-motion`.
 
-Your hero portrait is a real photo: `assets/profile.*` — **any of** `.jpg`, `.jpeg`, `.png`
-or `.webp` works, the page tries each in turn. If none is present you get a designed `LL`
-monogram card instead of a broken image. The frame is square, so a square headshot is used
-uncropped; a taller photo is centre-cropped to a square.
+- Responsive down to 360px, no horizontal overflow
+- Keyboard accessible — project cards are buttons, `Esc` closes the expanded view
+- Custom floating scrollbar; native scrolling untouched
+- Circular portrait with a conic gradient ring
+- Fonts: Fraunces, Inter, JetBrains Mono, with system fallbacks
 
-### If you ever want a real image instead
+## Projects featured
 
-| What | How |
+| Project | What it is |
 |---|---|
-| Swap the hero photo | replace `assets/profile.jpeg` (square works best, 800×800+) |
-| A project cover | set `cover: 'assets/whatever.png'` on that project — it overrides the drawn art |
-| A demo video | set `video: 'assets/whatever.mp4'` — it overrides both |
-| Social preview | drop `assets/og-cover.png` (1200×630) |
+| [mcp-wall](https://github.com/LallerLavish/mcp-wall) | Kernel-enforced sandbox runtime for untrusted MCP servers — Rust, Landlock, seccomp |
+| [PaperMind](https://github.com/LallerLavish/papermind) | Multi-tenant RAG document Q&A backend — Java 21, Spring AI, pgvector |
+| [AlgoForge](https://github.com/LallerLavish/AlgoForge-Open) | Multi-agent problem-solving system — Python, FastAPI, AutoGen |
 
-### Restyling a drawn cover
+## Contact
 
-Edit the `ART` map in the `<script>` block — two gradient stops and an accent per project:
+[Email](mailto:lallerlavish2023@gmail.com) · [LinkedIn](https://www.linkedin.com/in/lavish-laller-650453362/) · [LeetCode](https://leetcode.com/u/LavishLaller/)
 
-```js
-const ART = {
-  'mcp-wall':  { c1:'#F9F5EA', c2:'#F0D5C0', accent:'#E1603A', motif:'shield' },
-  'papermind': { c1:'#F6F7F1', c2:'#D7E1F2', accent:'#3D6FC4', motif:'pages'  },
-  'algoforge': { c1:'#FAF7E6', c2:'#F4E198', accent:'#C9A21B', motif:'nodes'  }
-};
+---
+
+<details>
+<summary><b>Maintenance notes</b></summary>
+
+### Structure
+
+```
+index.html    everything — markup, styles, scripts, generated cover art
+assets/       profile photo + résumé PDF
 ```
 
-`motif` can be `shield`, `pages` or `nodes` — swap them between projects freely.
+### Editing
 
-## 2. Edit your content
+- **Page text** — edit the HTML. Sections are commented and numbered.
+- **Projects** — edit the `PROJECTS` array in the `<script>` block. Cards and expanded views
+  both build from it, so each project is defined once.
+- **Live demo buttons** — set `demo: 'https://...'` on a project; `''` hides the button.
+- **Cover art** — the `ART` map holds two gradient stops, an accent and a motif
+  (`shield`, `pages`, `nodes`) per project.
+- **Colors** — CSS variables in the `:root` block at the top.
 
-- **Page text** — edit the HTML directly. Sections are commented and numbered.
-- **Project write-ups** — edit the `PROJECTS` array in the `<script>` block at the bottom. Cards and expanded views both rebuild from it, so you only edit in one place.
-- **Live demo buttons** — set `demo: 'https://...'` on a project. Leave it as `''` and the button stays hidden.
-- **Colors** — every color is a CSS variable in the `:root` block at the very top.
+### Media
 
-## 3. Deploy
+The hero photo is `assets/profile.*` — `.jpeg`, `.jpg`, `.png` and `.webp` all work, tried in
+order, falling back to a drawn monogram if none is found. The frame is square, so a square
+headshot shows uncropped.
 
-### GitHub Pages
+To use a real image for a project instead of the generated art, set `cover: 'assets/x.png'`
+on that project; `video: 'assets/x.mp4'` overrides both.
+
+### Deploying
+
+Push to `main` — GitHub Pages rebuilds in about a minute.
+
 ```bash
-git init
-git add .
-git commit -m "Portfolio"
-git branch -M main
-git remote add origin https://github.com/LallerLavish/LallerLavish.github.io.git
-git push -u origin main
+git add -A && git commit -m "update" && git push
 ```
-Repo → **Settings → Pages → Source: main / root**. Live at `https://lallerlavish.github.io` in a minute or two.
 
-### Netlify / Vercel / Cloudflare Pages
-Drag the whole folder onto their dashboard. No build command, no output directory.
-
-## Notes
-
-- Fonts load from Google Fonts (Fraunces, Inter, JetBrains Mono) with system fallbacks if offline.
-- Works down to ~360px wide; tested for horizontal overflow.
-- Keyboard accessible: project cards are buttons, `Esc` closes the expanded view.
-- The scrollbar is custom-drawn so it floats over the page with no track strip; native scrolling is untouched.
+</details>
