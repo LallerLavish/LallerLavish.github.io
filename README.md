@@ -11,15 +11,20 @@ Plain HTML, CSS and JavaScript in a single file — no framework, no build step,
 Project cover art is generated in-page as SVG, so the site ships with one photo and a PDF and
 nothing else. Deployed on GitHub Pages.
 
-Dark theme — black through deep indigo, purple into blue. The hero runs a canvas code
-animation behind the whole section; it pauses when off-screen or when the tab is hidden, and
-falls back to a single static frame under `prefers-reduced-motion`.
+**Dark and light themes.** Dark is near-black warmed with red; light is warm ivory through
+dusty rose. Both share the burgundy→rose accent. The toggle sits in the nav (and in the
+mobile menu). A first visit follows the OS setting; after that the visitor's choice is remembered in
+`localStorage`, and an inline `<head>` script applies it before paint so there's no flash.
+
+The hero runs a canvas code animation behind the whole section, repainting in the active
+theme's palette. It pauses when off-screen or when the tab is hidden, and falls back to a
+single static frame under `prefers-reduced-motion`.
 
 - Responsive down to 360px, no horizontal overflow
 - Keyboard accessible — project cards are buttons, `Esc` closes the expanded view
 - Custom floating scrollbar; native scrolling untouched
 - Circular portrait with a conic gradient ring
-- Fonts: Fraunces, Inter, JetBrains Mono, with system fallbacks
+- Fonts: Fraunces (display), Plus Jakarta Sans (body), JetBrains Mono (labels), with system fallbacks
 
 ## Projects featured
 
@@ -53,7 +58,13 @@ assets/       profile photo + résumé PDF
 - **Live demo buttons** — set `demo: 'https://...'` on a project; `''` hides the button.
 - **Cover art** — the `ART` map holds two gradient stops, an accent and a motif
   (`shield`, `pages`, `nodes`) per project.
-- **Colors** — CSS variables in the `:root` block at the top.
+- **Colors** — CSS variables in the `:root` block at the top; the `:root[data-theme="light"]`
+  block right below it overrides the same names for light mode. Translucent accents all read
+  from `--accent-rgb` / `--glow-rgb` / `--rose-rgb`, so changing the brand hue is a one-line edit.
+  The hue variables are `--wine`, `--wine-deep`, `--rose`, `--rose-deep`, plus `--coral`,
+  `--cyan`, `--amber` and `--pink` for the category dots.
+- **Cover palettes** — `ART_SETS.dark` and `ART_SETS.light` in the `<script>` block.
+- **Animation** — `DENSITY` (how busy) and `SPEED_MS` (how fast) in the hero animation block.
 
 ### Media
 
